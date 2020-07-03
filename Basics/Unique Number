@@ -1,0 +1,25 @@
+#include<iostream>
+using namespace std;
+int main() {
+
+#ifndef ONLINE_JUDGE
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+#endif
+	// We are give n(odd number of terms)
+	// all of them are there are in pair except one
+	// and we have to find that number
+	int n;
+	cin >> n;
+	int totalXOR = 0;
+	int firstNum;
+	cin >> firstNum;
+	totalXOR = firstNum;
+	int i = 1;
+	for (; i < n; i++) {
+		cin >> firstNum;
+		totalXOR = totalXOR ^ firstNum;
+
+	}
+	cout << totalXOR;
+}
