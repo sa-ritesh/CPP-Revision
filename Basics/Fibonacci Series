@@ -1,0 +1,23 @@
+#include<iostream>
+using namespace std;
+
+int main() {
+#ifndef ONLINE_JUDGE
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+#endif
+	int n;
+	cin >> n;
+	int a = 0;
+	int b = 1;
+	int i = 1;
+	int sum = 0;
+	while (i <=  n) {
+		cout << sum << " ";
+		a = b;
+		b = sum;
+		sum = a + b;
+		i++;
+	}
+
+}
