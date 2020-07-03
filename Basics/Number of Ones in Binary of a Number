@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+int main() {
+
+#ifndef ONLINE_JUDGE
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+#endif
+
+	int n;
+	cin >> n;
+	int count = 0;
+	while (n > 0) {
+		int ld = n % 10;
+		count += (ld & 1);
+		n = n >> 1;
+	}
+	cout << count;
+}
