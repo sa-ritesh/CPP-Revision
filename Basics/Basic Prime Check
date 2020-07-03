@@ -1,0 +1,30 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int main()
+{
+
+    int n;
+    cin >> n;
+    bool y = true;
+    int root = pow(n, 0.5);
+    int i = 2;
+    while (i <= root)
+    {
+        if (n % i == 0)
+        {
+            y = false;
+            break;
+        }
+        i++;
+    }
+    if (y == false)
+    {
+        cout << "Not Prime";
+    }
+    else
+    {
+        cout << "Prime";
+    }
+    return 0;
+}
