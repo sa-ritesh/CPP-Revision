@@ -1,26 +1,36 @@
-#include <stdio.h>
-#define M 3
-#define N 3
-int dp[50][50] = {0};
-int countPaths(int m, int n)
+#include <iostream>
+using namespace std;
+int main()
 {
-
-    if (m == M - 1 || n == N - 1)
+    int n, m;
+    cin >> n >> m;
+    int arr[n][m];
+    for (int i = 0; i < n; i++)
     {
-        return 1;
+        for (int j = 0; j < m; j++)
+        {
+            cin >> arr[i][j];
+        }
     }
-    if (dp[m][n] != 0)
+
+    for (int li = 0; li < n; li++)
     {
-        return dp[m][n];
+        for (int lj = 0; lj < m; lj++)
+        {
+            for (int bi = li; bi < n; bi++)
+            {
+                for (int bj = lj; bj < m; bj++)
+                {
+                    for (int i = li; i <= bi; i++)
+                    {
+                        for (int j = lj; j <= bj; j++)
+                        {
+                            cout << arr[i][j] << " ";
+                        }
+                    }
+                    cout << endl;
+                }
+            }
+        }
     }
-    return dp[m][n] = countPaths(m + 1, n)    // move down
-                      + countPaths(m, n + 1); // move right
-}
-
-int main(void)
-{
-    int k = countPaths(0, 0);
-    printf("The total number of paths is %d", k);
-
-    return 0;
 }
