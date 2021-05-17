@@ -1,29 +1,50 @@
-#include <iostream>
-using namespace std;
-int *parent = new int[100];
-class dsu
-{
+/*
+// Definition for a Node.
+class Node {
 public:
-    int findSet(int i)
-    {
-        if (parent[i] == -1)
-        {
-            return i;
-        }
-
-        return parent[i] = findSet(parent[i]);
+    int val;
+    vector<Node*> neighbors;
+    Node() {
+        val = 0;
+        neighbors = vector<Node*>();
     }
-    int unionSet(int x, int y)
-    {
-        int s1 = findSet(x);
-        int s2 = findSet(y);
-        if (s1 != s2)
-        {
-            parent[s2] = s1;
-        }
+    Node(int _val) {
+        val = _val;
+        neighbors = vector<Node*>();
+    }
+    Node(int _val, vector<Node*> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
     }
 };
+*/
 
-int main()
+class Solution
 {
-}
+public:
+    Node *cloneGraph(Node *node)
+    {
+        Node *ans = node;
+        map<int, Node *> arr;
+        map<Node *, bool> visited;
+        queue<Node *> q;
+        q.push(node);
+        while (!q.empty())
+        {
+            Node *n = q.top();
+            q.pop();
+            int v = n.top()->val;
+            arr[v] = n.top();
+            for (auto i : n->neighbors)
+            {
+                v = i->val;
+                if (!m[v])
+                {
+                    m[v] = i;
+                    q.push(i);
+                }
+            }
+        }
+        return ans;
+    }
+};
