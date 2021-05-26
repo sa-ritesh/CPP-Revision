@@ -1,16 +1,31 @@
 #include <iostream>
 using namespace std;
+int count = 0;
 int fib(int n, int *dp)
 {
-    if (n == 0 || n == 1)
+    if (n == 1)
     {
-        return n;
+        return 0;
     }
     if (dp[n] != 0)
     {
         return dp[n];
     }
-    return dp[n] = fib(n - 1, dp) + fib(n - 2, dp);
+    int op1, op2, op3 = INT_MAX;
+
+    if (n % 3 == 0)
+    {
+        op1 = fib(n / 3, dp) + 1;
+    }
+    else if (n % 2 == 0)
+    {
+        op2 = fib(n / 2, dp) + 1;
+    }
+    else
+    {
+        op3 = fib(n - 1, dp) + 1;
+    }
+    return dp[n] = min(op1, min(op2, op3));
 }
 int main()
 {
