@@ -1,36 +1,70 @@
 #include <iostream>
+#include <fstream>
+#include <algorithm>
+#include <map>
+#include <unordered_map>
+#include <vector>
+#include <cstring>
+#include <set>
+#include <cmath>
+#include <climits>
+#include <queue>
+#include <stack>
+#include <deque>
+#include <list>
+#define ll long long
 using namespace std;
-int count = 0;
-int fib(int n, int *dp)
+class Solution
 {
-    if (n == 1)
+    void dfs_helper(int src, vector<bool> &visited, map<int, list<int>> l)
     {
-        return 0;
+        visited[src] = true;
+        for (int nbr : l[src])
+        {
+            if (!visited[nbr])
+            {
+                dfs_helper(nbr, visited, l);
+            }
+        }
     }
-    if (dp[n] != 0)
+    bool dfs(int src, map<int, list<int>> l, int s)
     {
-        return dp[n];
+        //vector<pair<int,bool>> visited;
+        vector<bool> visited;
+        for (auto p : l)
+        {
+            visited.push_back(false);
+        }
+        visited[0] = true;
+        dfs_helper(0, visited, l);
+        for (int i = 0; i < s; i++)
+        {
+            if (!visited[i])
+            {
+                return false;
+            }
+        }
+        return true;
     }
-    int op1, op2, op3 = INT_MAX;
 
-    if (n % 3 == 0)
+public:
+    bool canVisitAllRooms(vector<vector<int>> &rooms)
     {
-        op1 = fib(n / 3, dp) + 1;
+        int size = rooms.size();
+        map<int, list<int>> l;
+        for (int i = 0; i < size; i++)
+        {
+            for (auto i1 : rooms[i])
+            {
+                l[i].push_back(i1);
+            }
+        }
+        return dfs(0, l, size);
     }
-    else if (n % 2 == 0)
-    {
-        op2 = fib(n / 2, dp) + 1;
-    }
-    else
-    {
-        op3 = fib(n - 1, dp) + 1;
-    }
-    return dp[n] = min(op1, min(op2, op3));
-}
+};
 int main()
 {
-    int n;
-    cin >> n;
-    int dp[n] = {0};
-    cout << fib(n, dp);
+    vector<vector<int>> v = {{1}, {2}, {}, {3}};
+    Solution s;
+    cout << s.canVisitAllRooms(v);
 }
